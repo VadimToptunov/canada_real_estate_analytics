@@ -6,6 +6,12 @@ lib/
 lib64/
 lib64
 rent-data-canada/*/__pycache__/
-rent-data-canada/rent_fast/generated_heatmaps/
-rent-data-canada/rent_fast/full_appartments_data/
-rent-data-canada/rent_fast/circlemap_datasets/
+rent-data-canada/circlemap_generator/generated_heatmaps/
+rent-data-canada/circlemap_generator/full_appartments_data/
+rent-data-canada/circlemap_generator/circlemap_datasets/
+rent-data-canada/circlemaps
+rent-data-canada/data/
+rent-data-canada/drivers/
+.DS_Store
+rent-data-canada/.DS_Store
+.idea
