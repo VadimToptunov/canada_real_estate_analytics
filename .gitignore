@@ -13,3 +13,4 @@ rent-data-canada/.DS_Store
 *.html
 *.sql
 *.csv
+*.geojson
