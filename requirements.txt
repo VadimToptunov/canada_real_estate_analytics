@@ -41,3 +41,6 @@ trio-websocket==0.9.2
 urllib3==1.26.7
 wsproto==1.0.0
 zstandard==0.16.0
+
+pandas~=1.4.0
+geopy~=2.2.0

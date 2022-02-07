@@ -3,9 +3,6 @@ from enum import Enum
 
 class RealtorEnums(Enum):
     CHROME_PATH = './drivers/chromedriver'
-    CIRCLEMAP_DATASETS = "./circlemap_generator/circlemap_datasets/"
-    DATA_PATH = "./data/"
-    GENERATED_CIRCLEMAPS_PATH = './circlemaps/'
     REALTOR_CA_COOKIES = {
         'visid_incap_2269415': '2gcQI9EkRCeULFsblGFTMBDHb2EAAAAAQUIPAAAAAABhJgyXar55MIqtKufSu+GP',
         'nlbi_2269415': 'wlXDVklPNw/Ai0wPkG5lugAAAABRHywEZnidIDW8FqSRKs4+',
@@ -39,59 +36,6 @@ class RealtorEnums(Enum):
                        'Currency': 'CAD',
                        'RecordsPerPage': '100', 'ApplicationId': '1', 'CultureId': '1', 'Version': '7.0',
                        "CurrentPage": '1'}
-    RENTFAST_COOKIES = {
-        'PHPSESSID': '8f1e54939c157e084f99d585ef438ff5',
-        'lastcity': 'Toronto',
-        'lastcommunity': 'apartment',
-    }
-    RENTFAST_HEADERS = {
-        'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0',
-        'Accept': 'application/json, text/plain, */*',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Referer': 'https://www.rentfaster.ca/',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Origin': 'https://www.rentfaster.ca',
-        'Connection': 'keep-alive',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'Pragma': 'no-cache',
-        'Cache-Control': 'no-cache',
-    }
-    RENTFAST_DATA = {
-        'beds': '1,1 + Den',
-        'baths': '1',
-        'smoking': 'Non-Smoking',
-        'lease_term': 'Long Term',
-        'type[]': 'Apartment',
-        'exclude': ''
-    }
-    RENTFAST_CITIES = [
-        "ab%2Fcalgary",
-        "ab%2Fedmonton",
-        "ab%2Fred-deer",
-        "bc%2Fvancouver",
-        "bc%2Fsurrey",
-        "bc%2Fburnaby",
-        "bc%2Frichmond",
-        "bc%2Fabbotsford",
-        "bc%2Fcoquitlam",
-        "bc%2Fkelowna",
-        "mb%2Fwinnipeg",
-        "on%2Ftoronto",
-        "on%2Fottawa",
-        "on%2Fmississauga",
-        "on%2Fbrampton",
-        "on%2Fhamilton",
-        "on%2Flondon",
-        "on%2Fmarkham",
-        "on%2Fvaughan",
-        "on%2Fkitchener",
-        "on%2Fwindsor",
-        "on%2Frichmond-hill",
-        "qc%2Fmontreal",
-    ]
-    RENTFAST_URL = 'https://www.rentfaster.ca/api/map.json'
     ZILLOW_INPUTLIST = [
         [{"currentPage": 1}, "AB",
          {"west": -163.253122125, "east": -66.749215875, "south": 46.61367884585051, "north": 61.72767648346558},

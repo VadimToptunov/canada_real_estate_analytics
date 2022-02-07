@@ -1,11 +1,14 @@
-from datetime import date
-from realtor_enums.RealtorEnums import RealtorEnums
 import json
-import time
 import random
+import time
 import urllib.parse
-from seleniumwire import webdriver
+
+import pandas as pd
 from bs4 import BeautifulSoup
+from seleniumwire import webdriver
+
+from realtor_enums.RealtorEnums import RealtorEnums
+from rent_helpers.GeoHelper import GeoHelper
 
 data = []
 
@@ -20,9 +23,6 @@ def run(input_list):
             'Edge/12.10166"')
         driver = webdriver.Chrome(RealtorEnums.CHROME_PATH.value, chrome_options=options)
         scrape(driver, i[0], i[1], i[2], i[3])
-    data_set = list(set(map(tuple, data)))
-    with open(f"{RealtorEnums.CIRCLEMAP_DATASETS.value}dump_{date.today()}.json", "a+") as f:
-        f.write(json.dumps(data_set))
     time.sleep(random.randint(10, 26))
     driver.close()
     driver.quit()
@@ -53,20 +53,33 @@ def scrape(driver, pagination, province, map_bounds, region_selection):
     total_pages = results.get("searchList").get("totalPages")
     search_results = results.get("searchResults").get("mapResults")
     for i in search_results:
-        item = []
         lat = i.get("latLong").get("latitude")
         long = i.get("latLong").get("longitude")
+        try:
+            zip_code = i.get("hdpData").get("homeInfo").get("zipcode")
+            fsa = zip_code[:3]
+        except Exception:
+            geohelper = GeoHelper(lat, long)
+            zip_code = geohelper.get_zip_outer()
+            fsa = zip_code[:3]
         price = int(
             str(i.get('price')).replace("/mo", "").replace("C$", "").replace("$", "").replace("+", "").replace(",", ""))
-        item.append(lat)
-        item.append(long)
-        item.append(price)
+        item = {
+            "latitude": float(lat),
+            "longitude": float(long),
+            "postal_code": str(zip_code),
+            "fsa": fsa,
+            "rent_price": int(price),
+        }
         data.append(item)
 
     pug = pagination["currentPage"] + 1
     if pug <= total_pages:
         pagination["currentPage"] = pug
         scrape(driver, pagination, province, map_bounds, region_selection)
+    df = pd.DataFrame(data)
+    df.to_csv("Realtor_ca_data_exp.csv", mode='a', index=False, header=False)
+    # df.to_csv("Realtor_ca_data.csv", mode='a', index=False, header=False)
 
 
 def run_zillow_scraping():
