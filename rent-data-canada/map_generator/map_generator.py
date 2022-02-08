@@ -1,22 +1,21 @@
 import datetime
 import folium
-from rent_helpers.DataCleaner import DataCleaner
 
-# data = "Data_CA_mean.csv"
+from db.DBConnector import DBConnector
+
 geo = r"lfsa.geojson"
 
 
-def get_circlemap():
+def get_map():
     m = folium.Map(location=[43.6532, -79.3832], zoom_start=10, tiles=None)
     folium.TileLayer('CartoDB positron', name="Light Map", control=False).add_to(m)
-
-    data_cleaner = DataCleaner("./Realtor_ca_data_exp.csv")
-    ready_df = data_cleaner.clean_data()
+    db_conn = DBConnector()
+    ready_df = db_conn.get_data_frame()
     chloropleth = folium.Choropleth(
         geo_data=geo,
         name='Choropleth Map of Canada 1 Bedroom Apartments Rent Prices',
         data=ready_df,
-        columns=['fsa', "rent_price"],
+        columns=['fsa', "average_price"],
         key_on='feature.properties.CFSAUID',
         bins=9,
         fill_color='OrRd',

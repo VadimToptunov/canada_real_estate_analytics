@@ -1,5 +1,6 @@
-import pandas as pd
 import requests
+
+from db.DBConnector import DBConnector
 from realtor_enums.RealtorEnums import RealtorEnums
 from rent_helpers.GeoHelper import GeoHelper
 
@@ -7,7 +8,6 @@ items = []
 
 
 def scrape(current_page):
-    fsa = ""
     print(current_page)
     data = RealtorEnums.REALTOR_CA_DATA.value
     data["CurrentPage"] = str(current_page)
@@ -50,9 +50,8 @@ def scrape(current_page):
 
 def run_scraping():
     items = scrape(1)
-    df = pd.DataFrame(items)
-    # df.to_csv("Realtor_ca_data_exp.csv", mode='a', index=False, header=False)
-    df.to_csv("Realtor_ca_data_exp.csv", mode='a', index=False)
+    db_conn = DBConnector()
+    db_conn.add_data_to_db(items)
 
 
 if __name__ == '__main__':

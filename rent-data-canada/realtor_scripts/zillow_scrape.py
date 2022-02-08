@@ -2,13 +2,12 @@ import json
 import random
 import time
 import urllib.parse
-
-import pandas as pd
 from bs4 import BeautifulSoup
 from seleniumwire import webdriver
 
 from realtor_enums.RealtorEnums import RealtorEnums
 from rent_helpers.GeoHelper import GeoHelper
+from db.DBConnector import DBConnector
 
 data = []
 
@@ -77,9 +76,8 @@ def scrape(driver, pagination, province, map_bounds, region_selection):
     if pug <= total_pages:
         pagination["currentPage"] = pug
         scrape(driver, pagination, province, map_bounds, region_selection)
-    df = pd.DataFrame(data)
-    df.to_csv("Realtor_ca_data_exp.csv", mode='a', index=False, header=False)
-    # df.to_csv("Realtor_ca_data.csv", mode='a', index=False, header=False)
+    db_conn = DBConnector()
+    db_conn.add_data_to_db(data)
 
 
 def run_zillow_scraping():
