@@ -3,13 +3,13 @@ import folium
 
 from db.DBConnector import DBConnector
 
-geo = r"lfsa.geojson"
+geo = "rent-data-canada/lfsa.geojson"
 
 
 def get_map():
     m = folium.Map(location=[43.6532, -79.3832], zoom_start=10, tiles=None)
     folium.TileLayer('CartoDB positron', name="Light Map", control=False).add_to(m)
-    db_conn = DBConnector()
+    db_conn = DBConnector("rent-data-canada/database/apptdata.db")
     ready_df = db_conn.get_data_frame()
     chloropleth = folium.Choropleth(
         geo_data=geo,

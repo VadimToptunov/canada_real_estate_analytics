@@ -50,7 +50,7 @@ def scrape(current_page):
 
 def run_scraping():
     items = scrape(1)
-    db_conn = DBConnector()
+    db_conn = DBConnector("database/apptdata.db")
     db_conn.add_data_to_db(items)
 
 
