@@ -17,8 +17,8 @@ def scrape(current_page):
                              cookies=RealtorEnums.REALTOR_CA_COOKIES.value, data=data)
     total_pages = response.json().get('Paging').get("TotalPages")
     results = response.json().get("Results")
-    for property in results:
-        d = property.get("Property")
+    for prop in results:
+        d = prop.get("Property")
         rent = d.get("LeaseRent").replace("$", "").replace("/", "").replace(",", "").replace("Monthly", "")
         if "Seasonal" in rent:
             rent = int(int(rent.replace("Seasonal", "")) / 3)
@@ -26,7 +26,7 @@ def scrape(current_page):
             rent = int(int(rent.replace("Yearly", "")) / 12)
         lat = d.get("Address").get("Latitude")
         long = d.get("Address").get("Longitude")
-        postal_code = property.get("PostalCode")
+        postal_code = prop.get("PostalCode")
         if postal_code is None or postal_code == "":
             geohelper = GeoHelper(lat, long)
             postal_code = geohelper.get_zip_outer()
@@ -49,9 +49,9 @@ def scrape(current_page):
 
 
 def run_scraping():
-    items = scrape(1)
+    data = scrape(1)
     db_conn = DBConnector("database/apptdata.db")
-    db_conn.add_data_to_db(items)
+    db_conn.add_data_to_db(data)
 
 
 if __name__ == '__main__':

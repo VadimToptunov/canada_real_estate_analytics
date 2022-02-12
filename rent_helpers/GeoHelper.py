@@ -1,5 +1,3 @@
-import time
-
 from geopy.extra.rate_limiter import RateLimiter
 from geopy.geocoders import Nominatim
 
