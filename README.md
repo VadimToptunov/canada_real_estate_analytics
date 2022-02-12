@@ -89,8 +89,8 @@ Traceback (most recent call last):
     raise GeocoderUnavailable(message)
 geopy.exc.GeocoderUnavailable: HTTPSConnectionPool(host='nominatim.openstreetmap.org', port=443): Max retries exceeded with url: /reverse?lat=53.455162&lon=-113.49506&format=json&addressdetails=1 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x119d5eb50>, 'Connection to nominatim.openstreetmap.org timed out. (connect timeout=1)'))
 ```
-##Result: 
+## Result: 
 ![alt text](./img/toronto-map.png)
 
-####Warning:
+#### Warning:
 The project is quite slow and opening the map takes time^ as the generated file weights 400MB because of lfsa.geojson data.
