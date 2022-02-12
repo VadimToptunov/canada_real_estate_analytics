@@ -76,7 +76,7 @@ def scrape(driver, pagination, province, map_bounds, region_selection):
     if pug <= total_pages:
         pagination["currentPage"] = pug
         scrape(driver, pagination, province, map_bounds, region_selection)
-    db_conn = DBConnector("database/apptdata.db")
+    db_conn = DBConnector(RealtorEnums.DB_PATH.value)
     db_conn.add_data_to_db(data)
 
 

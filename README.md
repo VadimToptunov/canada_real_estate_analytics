@@ -7,6 +7,7 @@ canada_real_estate_analytics
 │   .gitignore
 │   create_map_from_data.py   
 │   data-gatherer.py   
+│   gather.rent.data.plist   
 │   README.md
 │   requirements.txt       
 │   

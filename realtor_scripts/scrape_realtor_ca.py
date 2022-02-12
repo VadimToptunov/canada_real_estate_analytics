@@ -50,7 +50,7 @@ def scrape(current_page):
 
 def run_scraping():
     data = scrape(1)
-    db_conn = DBConnector("database/apptdata.db")
+    db_conn = DBConnector(RealtorEnums.DB_PATH.value)
     db_conn.add_data_to_db(data)
 
 
