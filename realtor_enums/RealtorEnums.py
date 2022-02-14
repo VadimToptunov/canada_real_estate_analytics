@@ -58,7 +58,7 @@ class RealtorEnums(Enum):
           "north": 79.5330186706889}, [{"regionId": 404367, "regionType": 2}]],
         [{"currentPage": 1}, "Prince Edward Island",
          {"west": -64.45139136132813, "east": -61.932775638671885, "south": 45.79982512920911,
-          "north": 47.2062557033035}[{"regionId": 404373, "regionType": 2}]],
+          "north": 47.2062557033035}, [{"regionId": 404373, "regionType": 2}]],
         [{"currentPage": 1}, "New Brunswick",
          {"west": -71.4494044453125, "east": -61.37494155468749, "south": 43.46471546742891,
           "north": 49.10609262057783}, [{"regionId": 404370, "regionType": 2}]],
@@ -66,13 +66,15 @@ class RealtorEnums(Enum):
                                         "north": 69.62908434214086}, [{"regionId": 404374, "regionType": 2}]],
         [{"currentPage": 1}, "Nunavut",
          {"west": -120.9247674375, "east": -60.895470562499995, "south": 61.272480225514165,
-          "north": 80.64779459446478}[{"regionId": 404368, "regionType": 2}]],
+          "north": 80.64779459446478}, [{"regionId": 404368, "regionType": 2}]],
         [{"currentPage": 1}, "Yukon",
          {"west": -147.99660993749998, "east": -116.79543806249998, "south": 57.4726949723917,
           "north": 71.27504601543325}, [{"regionId": 404376, "regionType": 2}]],
         [{"currentPage": 1}, "Saskatchewan",
          {"west": -110.008024, "east": -101.362304, "south": 48.999756, "north": 60.000061},
-         [{"regionId": 404369, "regionType": 2}]]
+         [{"regionId": 404369, "regionType": 2}]],
+        [{"currentPage": 1}, "NL", {"west": -91.88965556249998, "east": -27.46582743749999, "south": 29.961428714924512,
+                                    "north": 69.0869327975672}, [{"regionId": 404372, "regionType": 2}]]
     ]
 
     ZILLOW_BASE_LINK = "https://www.zillow.com/search/GetSearchPageState.htm?"

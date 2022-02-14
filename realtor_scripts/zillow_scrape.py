@@ -13,6 +13,7 @@ data = []
 
 
 def run(input_list):
+    pagination = 0
     for i in input_list:
         options = webdriver.ChromeOptions()
         options.add_argument('--ignore-certificate-errors')
@@ -21,10 +22,12 @@ def run(input_list):
             'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 '
             'Edge/12.10166"')
         driver = webdriver.Chrome(RealtorEnums.CHROME_PATH.value, chrome_options=options)
-        scrape(driver, i[0], i[1], i[2], i[3])
+        pagination = i[0]
+        scrape(driver, pagination, i[1], i[2], i[3])
     time.sleep(random.randint(10, 26))
     driver.close()
     driver.quit()
+    pagination = 0
 
 
 def scrape(driver, pagination, province, map_bounds, region_selection):
