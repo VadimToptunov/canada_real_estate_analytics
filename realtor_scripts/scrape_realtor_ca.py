@@ -35,8 +35,8 @@ def scrape(current_page):
             fsa = postal_code[:3]
 
         item = {
-            "latitude": float(lat),
-            "longitude": float(long),
+            "latitude": str(float(lat)),
+            "longitude": str(float(long)),
             "postal_code": str(postal_code),
             "fsa": str(fsa),
             "rent_price": int(rent),
@@ -51,7 +51,7 @@ def scrape(current_page):
 def run_scraping():
     data = scrape(1)
     db_conn = DBConnector(RealtorEnums.DB_PATH.value)
-    db_conn.add_data_to_db(data)
+    db_conn.save_distinct_to_db(data)
 
 
 if __name__ == '__main__':

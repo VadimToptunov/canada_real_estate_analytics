@@ -67,8 +67,8 @@ def scrape(driver, pagination, province, map_bounds, region_selection):
         price = int(
             str(i.get('price')).replace("/mo", "").replace("C$", "").replace("$", "").replace("+", "").replace(",", ""))
         item = {
-            "latitude": float(lat),
-            "longitude": float(long),
+            "latitude": str(float(lat)),
+            "longitude": str(float(long)),
             "postal_code": str(zip_code),
             "fsa": fsa,
             "rent_price": int(price),
@@ -80,7 +80,7 @@ def scrape(driver, pagination, province, map_bounds, region_selection):
         pagination["currentPage"] = pug
         scrape(driver, pagination, province, map_bounds, region_selection)
     db_conn = DBConnector(RealtorEnums.DB_PATH.value)
-    db_conn.add_data_to_db(data)
+    db_conn.save_distinct_to_db(data)
 
 
 def run_zillow_scraping():
