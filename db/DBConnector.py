@@ -3,7 +3,7 @@ import pandas as pd
 
 DATABASE = "database/apptdata.db"
 DF_REQUEST = """SELECT DISTINCT latitude, longitude, fsa, round(avg(rent_price), 2) 
-AS average_price FROM appt_rent_prices GROUP BY fsa;"""
+AS average_price FROM rent_prices GROUP BY fsa;"""
 
 
 class DBConnector:
@@ -13,7 +13,7 @@ class DBConnector:
         self.create_table()
 
     def create_table(self):
-        self.cur.execute("""CREATE TABLE IF NOT EXISTS appt_rent_prices(
+        self.cur.execute("""CREATE TABLE IF NOT EXISTS rent_prices(
         latitude TEXT,
         longitude TEXT,
         postal_code TEXT,
@@ -22,7 +22,7 @@ class DBConnector:
 
     def save_distinct_to_db(self, data):
         for i in data:
-            self.cur.execute("""INSERT OR IGNORE INTO appt_rent_prices VALUES(?, ?, ?, ?, ?)""",
+            self.cur.execute("""INSERT OR IGNORE INTO rent_prices VALUES(?, ?, ?, ?, ?)""",
                              (i['latitude'], i['longitude'], i['postal_code'], i['fsa'], i['rent_price']))
             self.conn.commit()
             return i
