@@ -2,7 +2,6 @@ from enum import Enum
 
 
 class RealtorEnums(Enum):
-    CHROME_PATH = '/Users/newuser/PycharmProjects/canada_real_estate_analytics/rent-data-canada/drivers/chromedriver'
     DB_PATH = "/Users/newuser/PycharmProjects/canada_real_estate_analytics/rent-data-canada/database/apptdata.db"
     REALTOR_CA_COOKIES = {
         'visid_incap_2269415': '2gcQI9EkRCeULFsblGFTMBDHb2EAAAAAQUIPAAAAAABhJgyXar55MIqtKufSu+GP',
