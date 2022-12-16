@@ -1,7 +1,5 @@
 import asyncio
 import json
-import random
-import time
 import urllib.parse
 from pyppeteer import launch
 
@@ -12,22 +10,10 @@ from db.DBConnector import DBConnector
 data = []
 
 
-async def intercept_response(response):
-    url = response.url
-    if not response.ok:
-        print('request %s failed' % url)
-        return
-    else:
-        print(response.url)
-        print(response.data)
-
-
 async def run(input_list):
-    browser = await launch({"headless": False, "args": ["--start-maximized"]})
+    browser = await launch({"headless": True, "args": ["--start-maximized"]})
     page = await browser.newPage()
-    await page.setRequestInterception(True)
     pagination = 0
-    await page.setViewport({"width": 1600, "height": 900})
     for item in input_list:
         pagination = item[0]
         await scrape(page, pagination, item[1], item[2], item[3])
@@ -49,42 +35,41 @@ async def scrape(page, pagination, province, map_bounds, region_selection):
 
     link = RealtorEnums.ZILLOW_BASE_LINK.value + urllib.parse.urlencode(str_to_encode) + '&wants={"cat1":[' \
                                                                                          '"mapResults"]}"&requestId=36 '
+    await page.setViewport({"width": 1600, "height": 900})
     await page.goto(link)
-    time.sleep(random.randint(3, 38))
-    # html = driver.page_source
-    # soup = BeautifulSoup(html, 'html.parser')
-    # heading = soup.select_one("body pre").text
-    # resp = json.loads(heading)
-    # results = resp.get("cat1")
-    # total_pages = results.get("searchList").get("totalPages")
-    # search_results = results.get("searchResults").get("mapResults")
-    # for i in search_results:
-    #     lat = i.get("latLong").get("latitude")
-    #     long = i.get("latLong").get("longitude")
-    #     try:
-    #         zip_code = i.get("hdpData").get("homeInfo").get("zipcode")
-    #         fsa = zip_code[:3]
-    #     except Exception:
-    #         geohelper = GeoHelper(lat, long)
-    #         zip_code = geohelper.get_zip_outer()
-    #         fsa = zip_code[:3]
-    #     price = int(
-    #         str(i.get('price')).replace("/mo", "").replace("C$", "").replace("$", "").replace("+", "").replace(",", ""))
-    #     item = {
-    #         "latitude": str(float(lat)),
-    #         "longitude": str(float(long)),
-    #         "postal_code": str(zip_code),
-    #         "fsa": fsa,
-    #         "rent_price": int(price),
-    #     }
-    #     data.append(item)
-    #
-    # pug = pagination["currentPage"] + 1
-    # if pug <= total_pages:
-    #     pagination["currentPage"] = pug
-    #     await scrape(page, pagination, province, map_bounds, region_selection)
-    # db_conn = DBConnector(RealtorEnums.DB_PATH.value)
-    # db_conn.save_distinct_to_db(data)
+    apptdata = await page.querySelector("body pre")
+    resp = await (await apptdata.getProperty('textContent')).jsonValue()
+    res = json.loads(resp)
+    results = res.get("cat1")
+    total_pages = results.get("searchList").get("totalPages")
+    search_results = results.get("searchResults").get("mapResults")
+    for i in search_results:
+        lat = i.get("latLong").get("latitude")
+        long = i.get("latLong").get("longitude")
+        try:
+            zip_code = i.get("hdpData").get("homeInfo").get("zipcode")
+            fsa = zip_code[:3]
+        except Exception:
+            geohelper = GeoHelper(lat, long)
+            zip_code = geohelper.get_zip_outer()
+            fsa = zip_code[:3]
+        price = int(
+            str(i.get('price')).replace("/mo", "").replace("C$", "").replace("$", "").replace("+", "").replace(",", ""))
+        item = {
+            "latitude": str(float(lat)),
+            "longitude": str(float(long)),
+            "postal_code": str(zip_code),
+            "fsa": fsa,
+            "rent_price": int(price),
+        }
+        data.append(item)
+
+    pug = pagination["currentPage"] + 1
+    if pug <= total_pages:
+        pagination["currentPage"] = pug
+        await scrape(page, pagination, province, map_bounds, region_selection)
+    db_conn = DBConnector()
+    db_conn.save_distinct_to_db(data)
 
 
 async def run_zillow_scraping():

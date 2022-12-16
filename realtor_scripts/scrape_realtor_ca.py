@@ -50,7 +50,7 @@ def scrape(current_page):
 
 def run_scraping():
     data = scrape(1)
-    db_conn = DBConnector(RealtorEnums.DB_PATH.value)
+    db_conn = DBConnector()
     db_conn.save_distinct_to_db(data)
 
 
