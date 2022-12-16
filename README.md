@@ -94,4 +94,4 @@ geopy.exc.GeocoderUnavailable: HTTPSConnectionPool(host='nominatim.openstreetmap
 ![alt text](./img/toronto-map.png)
 
 #### Warning:
-The project is quite slow and opening the map takes time^ as the generated file weights 400MB because of lfsa.geojson data.
+The project is quite slow and opening the map takes time, as the generated file weights 400MB because of lfsa.geojson data.
