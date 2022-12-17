@@ -11,8 +11,9 @@ data = []
 
 
 async def run(input_list):
-    browser = await launch({"headless": True, "args": ["--start-maximized"]})
+    browser = await launch({"headless": False, "args": ["--start-maximized"]})
     page = await browser.newPage()
+    page.setDefaultNavigationTimeout(50000)
     pagination = 0
     for item in input_list:
         pagination = item[0]
@@ -52,7 +53,11 @@ async def scrape(page, pagination, province, map_bounds, region_selection):
         except Exception:
             geohelper = GeoHelper(lat, long)
             zip_code = geohelper.get_zip_outer()
-            fsa = zip_code[:3]
+            try:
+                fsa = zip_code[:3]
+            except TypeError:
+                fsa = None
+
         price = int(
             str(i.get('price')).replace("/mo", "").replace("C$", "").replace("$", "").replace("+", "").replace(",", ""))
         item = {

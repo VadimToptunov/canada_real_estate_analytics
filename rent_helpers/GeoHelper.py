@@ -9,7 +9,7 @@ class GeoHelper:
 
     def get_zip_outer(self):
         geocoder = Nominatim(user_agent="Canada")
-        geo = RateLimiter(geocoder.reverse, min_delay_seconds=3, max_retries=100, return_value_on_exception=None)
+        geo = RateLimiter(geocoder.reverse, min_delay_seconds=2, max_retries=100, return_value_on_exception=None)
         location = geo((self.latitude, self.longitude))
         try:
             zip_code = location.raw.get("address").get("postcode").replace(" ", "")

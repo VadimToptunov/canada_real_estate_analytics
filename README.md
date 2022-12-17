@@ -35,16 +35,12 @@ canada_real_estate_analytics
 │   │   lfsa.geojson
 │   └───database
 │   │   │   apptdata.db
-│   │   
-│   └───drivers
-│       │   chromedriver
 │        
 └───rent-helpers
     │   __init__.py
     │   GeoHelper.py
 ```
 ## Where to find the files:
-- Chromedriver: https://chromedriver.chromium.org/downloads 
 - lfsa.shp: https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lfsa000b16a_e.zip 
 - apptdata.db - gather yourself with the project
 
