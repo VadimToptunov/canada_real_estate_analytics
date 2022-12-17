@@ -1,10 +1,10 @@
 import sqlite3
 
-from gathering_scripts.realtor_enums.RealtorEnums import RealtorEnums
-from app.models import Flats
+from models import Flats
 
 TABLENAME = "rent_prices"
-DB_PATH = "gathering_scripts/rent-data-canada/database/apptdata.db"
+DB_PATH = "../gathering_scripts/rent-data-canada/database/apptdata.db"
+
 
 def connect():
     conn = sqlite3.connect(DB_PATH)
@@ -27,7 +27,7 @@ AS average_price FROM {TABLENAME} GROUP BY fsa;""")
     rows = cur.fetchall()
     flats = []
     for i in rows:
-        flat = Flats(i[0], True if i[1] == 1 else False, i[2], i[3])
+        flat = Flats(i[0], i[1], i[2], i[3])
         flats.append(flat)
     conn.close()
     return flats
