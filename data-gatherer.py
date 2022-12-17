@@ -1,6 +1,6 @@
 import asyncio
 
-from realtor_scripts import scrape_realtor_ca, zillow_scrape
+from gathering_scripts.realtor_scripts import scrape_realtor_ca, zillow_scrape
 
 
 async def gather_rent_data():

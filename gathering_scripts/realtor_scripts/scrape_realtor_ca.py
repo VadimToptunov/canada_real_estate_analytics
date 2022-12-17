@@ -1,8 +1,9 @@
 import requests
 
-from db.DBConnector import DBConnector
-from realtor_enums.RealtorEnums import RealtorEnums
-from rent_helpers.GeoHelper import GeoHelper
+from gathering_scripts.realtor_enums.RealtorEnums import RealtorEnums
+from gathering_scripts.rent_helpers.GeoHelper import GeoHelper
+from gathering_scripts.db.DBConnector import DBConnector
+
 
 items = []
 

@@ -3,7 +3,7 @@ import pandas as pd
 
 from pathlib import Path
 
-from realtor_enums.RealtorEnums import RealtorEnums
+from gathering_scripts.realtor_enums.RealtorEnums import RealtorEnums
 
 DF_REQUEST = """SELECT DISTINCT latitude, longitude, fsa, round(avg(rent_price), 2) 
 AS average_price FROM rent_prices GROUP BY fsa;"""

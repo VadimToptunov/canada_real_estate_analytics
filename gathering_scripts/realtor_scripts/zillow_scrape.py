@@ -3,9 +3,9 @@ import json
 import urllib.parse
 from pyppeteer import launch
 
-from realtor_enums.RealtorEnums import RealtorEnums
-from rent_helpers.GeoHelper import GeoHelper
-from db.DBConnector import DBConnector
+from gathering_scripts.realtor_enums.RealtorEnums import RealtorEnums
+from gathering_scripts.rent_helpers.GeoHelper import GeoHelper
+from gathering_scripts.db.DBConnector import DBConnector
 
 data = []
 
