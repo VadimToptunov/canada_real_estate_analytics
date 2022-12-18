@@ -12,7 +12,6 @@ gathering_scripts/rent-data-canada/drivers/
 .DS_Store
 gathering_scripts/rent-data-canada/.DS_Store
 .idea
-*.html
 *.sql
 *.db
 *.geojson
