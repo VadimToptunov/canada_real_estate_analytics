@@ -1,11 +1,11 @@
 from flask import Flask, jsonify
-import db
+from app.server import db
 
 appFlask = Flask(__name__)
 
 
-@appFlask.route('/', methods=['GET'])
-def getRequest():
+@appFlask.route('/data', methods=['GET'])
+def get_data_from_db():
     flats = [b.serialize() for b in db.view()]
     return jsonify({
                 'res': flats,

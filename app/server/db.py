@@ -1,6 +1,6 @@
 import sqlite3
 
-from models import Flats
+from app.server.models import Flats
 
 TABLENAME = "rent_prices"
 DB_PATH = "../gathering_scripts/rent-data-canada/database/apptdata.db"
