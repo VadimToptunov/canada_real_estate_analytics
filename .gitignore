@@ -15,3 +15,4 @@ gathering_scripts/rent-data-canada/.DS_Store
 *.sql
 *.db
 *.geojson
+*.plist

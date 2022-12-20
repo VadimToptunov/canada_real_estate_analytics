@@ -4,41 +4,47 @@ Moreover, the gathered data is divided by FSA (Forward Sortation Areas), as the 
 ## Project structure:
 ```
 canada_real_estate_analytics
-│   .gitignore
-│   create_map_from_data.py   
-│   data-gatherer.py   
-│   gather.rent.data.plist   
-│   README.md
-│   requirements.txt       
-│   
-└───db  
-│   │   __init__.py
-│   │   DBConnector.py
-│   
-└───img
-│   │   toronto-map.png
-│      
-└───map_generator
-│    │   __init__.py
-│    │   map-generator.py        
-│      
-└───realtor_enums
-│    │   __init__.py
-│    │   RealtorEnums.py   
-│        
-└───realtor_scripts
-│    │   __init__.py
-│    │   scrape_realtor_ca.py    
-│    │   zillow_scrape.py    
-│    
-└───rent-data-canada
-│   │   lfsa.geojson
-│   └───database
-│   │   │   apptdata.db
-│        
-└───rent-helpers
-    │   __init__.py
-    │   GeoHelper.py
+├── .gitignore
+├── README.md
+├── app
+│   ├── __init__.py
+│   ├── app.py
+│   ├── client
+│   │   ├── __init__.py
+│   │   ├── static
+│   │   │   ├── canada_topo.js
+│   │   │   ├── main.css
+│   │   │   └── main.js
+│   │   └── templates
+│   │       └── index.html
+│   └── server
+│       ├── __init__.py
+│       ├── db.py
+│       └── models.py
+├── create_map_from_data.py
+├── data-gatherer.py
+├── gathering_scripts
+│   ├── __init__.py
+│   ├── db
+│   │   ├── DBConnector.py
+│   │   └── __init__.py
+│   ├── realtor_enums
+│   │   ├── RealtorEnums.py
+│   │   └── __init__.py
+│   ├── realtor_scripts
+│   │   ├── __init__.py
+│   │   ├── scrape_realtor_ca.py
+│   │   └── zillow_scrape.py
+│   └── rent_helpers
+│       ├── GeoHelper.py
+│       └── __init__.py
+├── img
+│   └── toronto-map.png
+├── map_generator
+│   ├── __init__.py
+│   └── map_generator.py
+└── requirements.txt
+
 ```
 ## Where to find the files:
 - lfsa.shp: https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/files-fichiers/2016/lfsa000b16a_e.zip 
