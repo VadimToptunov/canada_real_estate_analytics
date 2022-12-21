@@ -18,6 +18,7 @@ class DBConnector:
 
     def create_table(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS rent_prices(
+        homeid TEXT,
         latitude TEXT,
         longitude TEXT,
         postal_code TEXT,
@@ -25,11 +26,18 @@ class DBConnector:
         rent_price INTEGER)""")
 
     def save_distinct_to_db(self, data):
+        cursor = self.cur
+        connection = self.conn
         for i in data:
-            self.cur.execute("""INSERT OR IGNORE INTO rent_prices VALUES(?, ?, ?, ?, ?)""",
-                             (i['latitude'], i['longitude'], i['postal_code'], i['fsa'], i['rent_price']))
-            self.conn.commit()
-            return i
+            homeid = i["_id"]
+            lat = i['latitude']
+            longt = i['longitude']
+            code = i['postal_code']
+            fsa = i['fsa']
+            price = i['rent_price']
+            cursor.execute("INSERT OR IGNORE INTO rent_prices VALUES(?, ?, ?, ?, ?, ?)",
+                           (homeid, lat, longt, code, fsa, price))
+            connection.commit()
 
     def get_data_frame(self):
         return pd.read_sql_query(DF_REQUEST, self.conn)
@@ -38,5 +46,5 @@ class DBConnector:
         path = Path('rent-data-canada/database')
         if path.is_dir():
             pass
-        else:path.mkdir(parents=True)
-
+        else:
+            path.mkdir(parents=True)

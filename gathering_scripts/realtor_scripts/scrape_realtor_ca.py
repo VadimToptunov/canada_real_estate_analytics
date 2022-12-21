@@ -19,6 +19,7 @@ def scrape(current_page):
     total_pages = response.json().get('Paging').get("TotalPages")
     results = response.json().get("Results")
     for prop in results:
+        id = prop.get('Id')
         d = prop.get("Property")
         rent = d.get("LeaseRent").replace("$", "").replace("/", "").replace(",", "").replace("Monthly", "")
         if "Seasonal" in rent:
@@ -36,6 +37,7 @@ def scrape(current_page):
             fsa = postal_code[:3]
 
         item = {
+            "_id": id,
             "latitude": str(float(lat)),
             "longitude": str(float(long)),
             "postal_code": str(postal_code),

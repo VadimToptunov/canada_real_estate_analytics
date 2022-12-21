@@ -45,6 +45,10 @@ async def scrape(page, pagination, province, map_bounds, region_selection):
     total_pages = results.get("searchList").get("totalPages")
     search_results = results.get("searchResults").get("mapResults")
     for i in search_results:
+        try:
+            appt_id = i.get("zpid")
+        except Exception:
+            appt_id = i.get("buildingId")
         lat = i.get("latLong").get("latitude")
         long = i.get("latLong").get("longitude")
         try:
@@ -61,6 +65,7 @@ async def scrape(page, pagination, province, map_bounds, region_selection):
         price = int(
             str(i.get('price')).replace("/mo", "").replace("C$", "").replace("$", "").replace("+", "").replace(",", ""))
         item = {
+            "_id": appt_id,
             "latitude": str(float(lat)),
             "longitude": str(float(long)),
             "postal_code": str(zip_code),
