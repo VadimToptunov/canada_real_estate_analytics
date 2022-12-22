@@ -66,6 +66,7 @@ async def scrape(page, pagination, province, map_bounds, region_selection):
             str(i.get('price')).replace("/mo", "").replace("C$", "").replace("$", "").replace("+", "").replace(",", ""))
         item = {
             "_id": appt_id,
+            "latlong": str(float(lat)) + str(float(long)),
             "latitude": str(float(lat)),
             "longitude": str(float(long)),
             "postal_code": str(zip_code),

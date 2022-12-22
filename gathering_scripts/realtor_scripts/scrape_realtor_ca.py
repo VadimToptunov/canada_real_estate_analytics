@@ -38,6 +38,7 @@ def scrape(current_page):
 
         item = {
             "_id": id,
+            "latlong": str(float(lat)) + str(float(long)),
             "latitude": str(float(lat)),
             "longitude": str(float(long)),
             "postal_code": str(postal_code),

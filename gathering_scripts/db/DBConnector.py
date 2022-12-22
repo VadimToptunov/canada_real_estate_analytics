@@ -19,6 +19,7 @@ class DBConnector:
     def create_table(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS rent_prices(
         homeid TEXT PRIMARY KEY,
+        latlong TEXT UNIQUE,
         latitude TEXT,
         longitude TEXT,
         postal_code TEXT,
@@ -30,13 +31,14 @@ class DBConnector:
         connection = self.conn
         for i in data:
             homeid = i["_id"]
+            latlong = i["latlong"]
             lat = i['latitude']
             longt = i['longitude']
             code = i['postal_code']
             fsa = i['fsa']
             price = i['rent_price']
-            cursor.execute("INSERT OR REPLACE INTO rent_prices(homeid, latitude, longitude, postal_code, fsa, "
-                           "rent_price) VALUES(?,?,?,?,?,?)", (homeid, lat, longt, code, fsa, price))
+            cursor.execute("INSERT OR REPLACE INTO rent_prices(homeid, latlong, latitude, longitude, postal_code, fsa, "
+                           "rent_price) VALUES(?,?,?,?,?,?,?)", (homeid, latlong, lat, longt, code, fsa, price))
 
             connection.commit()
 
