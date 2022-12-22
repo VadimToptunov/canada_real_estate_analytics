@@ -8,7 +8,6 @@ blinker==1.5
 branca==0.6.0
 Brotli==1.0.9
 bs4==0.0.1
-celery==5.2.7
 certifi==2022.12.7
 cffi==1.15.1
 chardet==5.1.0
@@ -79,3 +78,5 @@ Werkzeug==2.2.2
 wsproto==1.2.0
 zipp==3.11.0
 zstandard==0.19.0
+
+APScheduler~=3.9.1.post1

@@ -9,6 +9,7 @@ gathering_scripts/rent-data-canada/*/__pycache__/
 gathering_scripts/rent-data-canada/drivers/
 */*/__pycache__/
 */__pycache__/
+__pycache__/
 .DS_Store
 gathering_scripts/rent-data-canada/.DS_Store
 .idea

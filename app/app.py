@@ -1,7 +1,10 @@
+import asyncio
 import os
 
-from flask import Flask, jsonify, render_template
 from app.server import db
+from apscheduler.schedulers.background import BackgroundScheduler
+from data_gatherer import gather_rent_data
+from flask import Flask, jsonify, render_template
 
 template_dir = os.path.abspath('./client/templates/')
 static_dir = os.path.abspath('./client/static/')
@@ -17,11 +20,18 @@ def index():
 def get_data_from_db():
     flats = [b.serialize() for b in db.view()]
     return jsonify({
-                'res': flats,
-                'status': '200',
-                'no_of_prices': len(flats)
-            })
+        'res': flats,
+        'status': '200',
+        'no_of_prices': len(flats)
+    })
+
+
+def background_job():
+    asyncio.get_event_loop().run_until_complete(gather_rent_data())
 
 
 if __name__ == '__main__':
     appFlask.run()
+    scheduler = BackgroundScheduler()
+    job = scheduler.add_job(background_job, 'cron', days_of_week='mon-sun', minutes=30, hours=19)
+    scheduler.start()
