@@ -1,6 +1,5 @@
 import sqlite3
-
-from app.server.models import Flats
+from . import models
 
 TABLENAME = "rent_prices"
 DB_PATH = "../gathering_scripts/rent-data-canada/database/apptdata.db"
@@ -27,7 +26,7 @@ AS average_price FROM {TABLENAME} GROUP BY fsa;""")
     rows = cur.fetchall()
     flats = []
     for i in rows:
-        flat = Flats(i[0], i[1], i[2], i[3])
+        flat = models.Flats(i[0], i[1], i[2], i[3])
         flats.append(flat)
     conn.close()
     return flats

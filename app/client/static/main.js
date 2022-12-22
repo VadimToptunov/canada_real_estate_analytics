@@ -69,7 +69,7 @@ const map = L.map('map').setView([43.6532, -79.3832], 6, null);
 	}
 
 	async function getPrices(){
-		let response = await fetch('http://localhost:5000/data'); //TODO: Fix CORS Policy issue
+		let response = await fetch('http://localhost:5000/data');
 		let data = await response.json();
 		console.log(data);
 		return data;
