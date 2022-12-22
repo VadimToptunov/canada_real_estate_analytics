@@ -4,7 +4,7 @@ import os
 from app.server import db
 from apscheduler.schedulers.background import BackgroundScheduler
 from data_gatherer import gather_rent_data
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, send_from_directory
 
 template_dir = os.path.abspath('./client/templates/')
 static_dir = os.path.abspath('./client/static/')
@@ -24,6 +24,12 @@ def get_data_from_db():
         'status': '200',
         'no_of_prices': len(flats)
     })
+
+
+@appFlask.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(static_dir, 'images/'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 def background_job():
